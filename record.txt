@@ -1,0 +1,6 @@
+tips:
+
+1. replace string: Double_t-->Float_t
+sed -i 's/Double_t/Float_t/g' compare.C
+
+2. 

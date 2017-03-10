@@ -1,0 +1,102 @@
+void compare()
+{
+  TFile * input = TFile::Open("./data4training.root");
+  TFile * ff = new TFile("store.root","RECREATE");
+  TTree * t = new TTree("t","signal and background");
+  TTree *signal = (TTree *)input->Get("TreeS");
+  TTree *background = (TTree *)input->Get("TreeB");
+  Float_t s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19;
+  Float_t b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16,b17,b18,b19;
+  Long64_t n;
+  n = signal->GetEntries();
+  signal->SetBranchAddress("var0",&s0);
+  signal->SetBranchAddress("var1",&s1);
+  signal->SetBranchAddress("var2",&s2);
+  signal->SetBranchAddress("var3",&s3);
+  signal->SetBranchAddress("var4",&s4);
+  signal->SetBranchAddress("var5",&s5);
+  signal->SetBranchAddress("var6",&s6);
+  signal->SetBranchAddress("var7",&s7);
+  signal->SetBranchAddress("var8",&s8);
+  signal->SetBranchAddress("var9",&s9);
+  signal->SetBranchAddress("var10",&s10);
+  signal->SetBranchAddress("var11",&s11);
+  signal->SetBranchAddress("var12",&s12);
+  signal->SetBranchAddress("var13",&s13);
+  signal->SetBranchAddress("var14",&s14);
+  signal->SetBranchAddress("var15",&s15);
+  signal->SetBranchAddress("var16",&s16);
+  signal->SetBranchAddress("var17",&s17);
+  signal->SetBranchAddress("var18",&s18);
+  signal->SetBranchAddress("var19",&s19);
+  /**********************************************/
+  background->SetBranchAddress("var0",&b0);
+  background->SetBranchAddress("var1",&b1);
+  background->SetBranchAddress("var2",&b2);
+  background->SetBranchAddress("var3",&b3);
+  background->SetBranchAddress("var4",&b4);
+  background->SetBranchAddress("var5",&b5);
+  background->SetBranchAddress("var6",&b6);
+  background->SetBranchAddress("var7",&b7);
+  background->SetBranchAddress("var8",&b8);
+  background->SetBranchAddress("var9",&b9);
+  background->SetBranchAddress("var10",&b10);
+  background->SetBranchAddress("var11",&b11);
+  background->SetBranchAddress("var12",&b12);
+  background->SetBranchAddress("var13",&b13);
+  background->SetBranchAddress("var14",&b14);
+  background->SetBranchAddress("var15",&b15);
+  background->SetBranchAddress("var16",&b16);
+  background->SetBranchAddress("var17",&b17);
+  background->SetBranchAddress("var18",&b18);
+  background->SetBranchAddress("var19",&b19);
+  /**************************************************/
+  t->Branch("s0",&s0,"s0/F");
+  t->Branch("s1",&s1,"s1/F");
+  t->Branch("s2",&s2,"s2/F");
+  t->Branch("s3",&s3,"s3/F");
+  t->Branch("s4",&s4,"s4/F");
+  t->Branch("s5",&s5,"s5/F");
+  t->Branch("s6",&s6,"s6/F");
+  t->Branch("s7",&s7,"s7/F");
+  t->Branch("s8",&s8,"s8/F");
+  t->Branch("s9",&s9,"s9/F");
+  t->Branch("s10",&s10,"s10/F");
+  t->Branch("s11",&s11,"s11/F");
+  t->Branch("s12",&s12,"s12/F");
+  t->Branch("s13",&s13,"s13/F");
+  t->Branch("s14",&s14,"s14/F");
+  t->Branch("s15",&s15,"s15/F");
+  t->Branch("s16",&s16,"s16/F");
+  t->Branch("s17",&s17,"s17/F");
+  t->Branch("s18",&s18,"s18/F");
+  t->Branch("s19",&s19,"s19/F");
+
+  t->Branch("b0",&b0,"b0/F");
+  t->Branch("b1",&b1,"b1/F");
+  t->Branch("b2",&b2,"b2/F");
+  t->Branch("b3",&b3,"b3/F");
+  t->Branch("b4",&b4,"b4/F");
+  t->Branch("b5",&b5,"b5/F");
+  t->Branch("b6",&b6,"b6/F");
+  t->Branch("b7",&b7,"b7/F");
+  t->Branch("b8",&b8,"b8/F");
+  t->Branch("b9",&b9,"b9/F");
+  t->Branch("b10",&b10,"b10/F");
+  t->Branch("b11",&b11,"b11/F");
+  t->Branch("b12",&b12,"b12/F");
+  t->Branch("b13",&b13,"b13/F");
+  t->Branch("b14",&b14,"b14/F");
+  t->Branch("b15",&b15,"b15/F");
+  t->Branch("b16",&b16,"b16/F");
+  t->Branch("b17",&b17,"b17/F");
+  t->Branch("b18",&b18,"b18/F");
+  t->Branch("b19",&b19,"b19/F");
+  for(Int_t i = 0;i < n;i++)
+    {
+      signal->GetEntry(i);
+      background->GetEntry(i);
+      t->Fill();
+    }
+  ff->Write();
+}
